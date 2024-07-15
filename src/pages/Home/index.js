@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
@@ -10,10 +11,25 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-import { useData } from "../../contexts/DataContext";
+
+import DataContext from "../../contexts/DataContext";
 
 const Page = () => {
-  const { last } = useData();
+  const { data } = useContext(DataContext);
+
+  const getMostRecentEventCover = (events) => {
+    if (!events || events.length === 0) {
+      return null;
+    }
+    const mostRecentEvent = events.reduce((acc, current) => {
+      const accDate = new Date(acc.date);
+      const currentDate = new Date(current.date);
+      return currentDate > accDate ? current : acc;
+    });
+    return mostRecentEvent.cover;
+  };
+  const MostRecentEventCover =
+    data && data.events ? getMostRecentEventCover(data.events) : null;
   return (
     <>
       <header>
@@ -115,9 +131,9 @@ const Page = () => {
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
           <EventCard
-            imageSrc={last?.cover}
-            title={last?.title}
-            date={new Date(last?.date)}
+            imageSrc={MostRecentEventCover}
+            title={data?.events[0]?.title}
+            date={new Date(data?.date)}
             small
             label="boom"
           />
