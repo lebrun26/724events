@@ -30,6 +30,7 @@ const Page = () => {
   };
   const last =
     data && data.events ? getMostRecentEventCover(data.events) : null;
+  console.log(last);
   return (
     <>
       <header>

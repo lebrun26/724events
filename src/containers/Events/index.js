@@ -50,8 +50,8 @@ const EventList = () => {
                 {({ setIsOpened }) => (
                   <EventCard
                     onClick={() => setIsOpened(true)}
-                    imageSrc={event.cover}
-                    title={event.title}
+                    imageSrc={event?.cover}
+                    title={event?.title}
                     date={new Date(event.date)}
                     label={event.type}
                   />
