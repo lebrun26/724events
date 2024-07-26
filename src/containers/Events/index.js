@@ -17,8 +17,6 @@ const EventList = () => {
   const filteredEvents = (data?.events || []).filter(
     (event) => !type || event.type === type
   );
-  // console.log("evenement filtre: ", filteredEvents);
-  // console.log("type initial: ", type);
   // Mise en place de la pagination
   const paginatedEvents = filteredEvents.slice(
     (currentPage - 1) * PER_PAGE,
@@ -26,7 +24,6 @@ const EventList = () => {
   );
 
   const changeType = (evtType) => {
-    // console.log("type selectionner: ", evtType);
     setCurrentPage(1);
     setType(evtType);
   };
